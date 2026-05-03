@@ -2,7 +2,9 @@ bl_info = {
     "name": "Motion Control Export Tool",
     "author": "Josh Sheldon",
     "category": "Import-Export",
-    "blender": (3, 0, 0)
+    "blender": (5, 1, 0),
+    "version": (1, 1, 0),
+    "description": "Export camera movement for Dragonframe motion control",
 }
 
 import bpy
@@ -183,8 +185,8 @@ class ExportMovement(Operator):
 def getAxisObject(axisIndex):
     global props
     objectName = getattr(props, "moco_axis_object_" + str(axisIndex))
-    if not (bpy.data.objects.get(objectName) is None):
-        return bpy.context.scene.objects[objectName]
+    if objectName in bpy.data.objects:
+        return bpy.data.objects[objectName]
     
     
 def getAxisComponent(axisIndex):
